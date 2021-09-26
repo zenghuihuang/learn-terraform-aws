@@ -3,12 +3,15 @@
 ```bash
 terraform init
 ```
-to prepare a working directory containing Terraform configuration files.
+   to prepare a working directory containing Terraform configuration files.
+
+
+
 2. Use the command
 ```bash
 terraform plan
 ```
-to create an execution plan, but terraform will not make any changes until the command:
+   to create an execution plan, but terraform will not make any changes until the command:
 
 ```bash
 terraform apply
