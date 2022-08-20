@@ -1,0 +1,10 @@
+__pycache__
+*.pyc
+.cache
+docs/_build
+.coverage
+
+# SetupTools artifacts.
+build/
+dist/
+nrewebservices.egg-info/

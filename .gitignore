@@ -1,0 +1,14 @@
+.terraform/*
+*.zip
+
+# Ignore terraform binary
+.terraform
+
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Local .terraform directories
+**/.terraform/*
+
