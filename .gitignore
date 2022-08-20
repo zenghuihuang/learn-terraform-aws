@@ -12,3 +12,5 @@
 # Local .terraform directories
 **/.terraform/*
 
+*.pem
+
