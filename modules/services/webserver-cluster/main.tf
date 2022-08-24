@@ -1,6 +1,6 @@
 resource "aws_launch_configuration" "example" {
   image_id        = "ami-0eb82ff4044778f35"
-  instance_type   = "t2.micro"
+  instance_type   = var.instance_type
   security_groups = [aws_security_group.instance.id]
   user_data       = <<-EOF
               #!/bin/bash
@@ -31,8 +31,8 @@ resource "aws_security_group" "instance" {
 resource "aws_autoscaling_group" "example" {
   launch_configuration = aws_launch_configuration.example.name
 
-  min_size = 2
-  max_size = 10
+  min_size = var.min_size
+  max_size = var.max_size
 
   # availability_zones = [var.region]
   vpc_zone_identifier = data.aws_subnets.default.ids
@@ -50,7 +50,7 @@ resource "aws_autoscaling_group" "example" {
 
 # Create Application Load Balancer(ALB)
 resource "aws_lb" "example" {
-  name               = "terraform-asg-example"
+  name               = "${var.cluster_name}-example"
   load_balancer_type = "application"
   subnets            = data.aws_subnets.default.ids
   security_groups    = [aws_security_group.alb.id]
@@ -79,7 +79,7 @@ resource "aws_lb_listener" "http" {
 #be created to receive incoming requests on port 80, and outgoing requests on all ports to perform health checks
 
 resource "aws_security_group" "alb" {
-  name = "terraform-example-alb"
+  name = "${var.cluster_name}-alb"
 
   # Allow inbound HTTP requests
   ingress {
@@ -104,7 +104,7 @@ resource "aws_security_group" "alb" {
 # Create target group for ASG.
 # Target groups will perform health checks on individual servers and will take care of sending requests to them.
 resource "aws_lb_target_group" "asg" {
-  name     = "terraform-asg-example"
+  name     = "${var.cluster_name}-example"
   port     = var.server_port
   protocol = "HTTP"
   vpc_id   = data.aws_vpc.default.id
