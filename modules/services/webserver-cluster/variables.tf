@@ -1,7 +1,7 @@
 variable "cluster_name" {
-    description = "The name of the cluster"
-    type = string
-  
+  description = "The name of the cluster"
+  type        = string
+
 }
 
 variable "region" {
@@ -16,17 +16,17 @@ variable "server_port" {
 }
 
 variable "instance_type" {
-    description = "The type of EC2 instance"
-    type=string
-  
+  description = "The type of EC2 instance"
+  type        = string
+
 }
 
 variable "min_size" {
   description = "The minimum number of EC2 instaces in the ASG"
-  type = number
+  type        = number
 }
 
 variable "max_size" {
   description = "The maximum number of EC2 instaces in the ASG"
-  type = number
+  type        = number
 }
