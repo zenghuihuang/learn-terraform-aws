@@ -139,3 +139,9 @@ resource "aws_lb_listener_rule" "asg" {
     target_group_arn = aws_lb_target_group.asg.arn
   }
 }
+
+resource "aws_iam_user" "example" {
+  count = 3
+  name = "neo.${count.index}"
+  
+}
