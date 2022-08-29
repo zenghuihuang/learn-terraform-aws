@@ -46,6 +46,19 @@ resource "aws_autoscaling_group" "example" {
     propagate_at_launch = true
   }
 
+  dynamic "tag"{
+    for_each = var.custom_tags
+
+    content {
+      key = tag.key
+      value = tag.value
+      propagate_at_launch = true
+    }
+  }
+
+
+  
+
 }
 
 # Create Application Load Balancer(ALB)
@@ -141,7 +154,7 @@ resource "aws_lb_listener_rule" "asg" {
 }
 
 resource "aws_iam_user" "example" {
-  count = 3
-  name = "neo.${count.index}"
   
+  count = length(var.user_name)
+  name = var.user_name[count.index]
 }

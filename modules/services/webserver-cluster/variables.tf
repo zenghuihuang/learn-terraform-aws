@@ -30,3 +30,16 @@ variable "max_size" {
   description = "The maximum number of EC2 instaces in the ASG"
   type        = number
 }
+
+variable "user_name" {
+  description = "The name of IAM user"
+  type = list(string)
+  default = [ "apple","strawberry","mango" ]
+  
+}
+
+variable "custom_tags" {
+    description = "Custom tags "
+    type = map(string)
+    default = {}
+}

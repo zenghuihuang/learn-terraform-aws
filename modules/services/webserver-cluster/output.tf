@@ -10,3 +10,16 @@ output "alb_dns_name" {
   
 }
 
+output "first_iam_arn" {
+  value = aws_iam_user.example[0]
+  description = "The ARN for the first IAM user"
+  
+}
+
+output "iam_all_arns" {
+  value = aws_iam_user.example[*].arn
+  description = "The ARN of all IAM users"
+  
+}
+
+
