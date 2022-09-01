@@ -1,25 +1,7 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.0"
-    }
-  }
-}
+module "if-else" {
+  source = "./modules"
 
-resource "aws_iam_policy" "cloudwatch_read_only" {
-    name = "cloudwatch-read-only-policy"
-    policy = data.aws_iam_policy_document.cloudwatch_read_only.json
-}
-
-data "aws_iam_policy_document" "cloudwatch_read_only" {
-    statement {
-        effect = "Allow"
-        actions = [
-            "cloudwatch:Describe*",
-            "cloudwatch:Get*",
-            "cloudwatch:List*"
-        ]
-        resources = ["*"]
-    }
+  #cloudwatch_full_access = true
+  cloudwatch_full_access = false
+  iam_user               = "Apple"
 }
